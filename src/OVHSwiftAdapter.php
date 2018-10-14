@@ -124,47 +124,6 @@ class OVHSwiftAdapter extends SwiftAdapter
     }
 
     /**
-     * Generate a signature and get data for form POST middleware request
-     *
-     * @param  int $maxFileSize
-     * @param  int $maxFileCount
-     * @param  int $expiration
-     * @param string $path
-     * @param  string $redirect
-     * @return array
-     */
-    public function getFormPostMiddlewareData($maxFileSize, $maxFileCount, $expiration, $path = '', $redirect = '')
-    {
-        $this->checkParams();
-
-        // expiry is relative to current time
-        $expiresAt = $expiration instanceof Carbon ? $expiration->timestamp : (int) (time() + 60 * 60);
-
-        // the url on the OVH host
-        $codePath = sprintf(
-            '/v1/AUTH_%s/%s/%s',
-            $this->urlVars[1],
-            $this->urlVars[2],
-            $path
-        );
-
-        // body for the HMAC hash
-        $body = sprintf("%s\n%s\n%s\n%s\n%s", $codePath, $redirect,
-            $maxFileSize, $maxFileCount, $expiresAt);
-
-        // the actual hash signature
-        $signature = hash_hmac('sha1', $body, $this->urlVars[3]);
-
-        return [
-            'url' => sprintf('https://storage.%s.cloud.ovh.net%s', $this->urlVars[0], $codePath),
-            'signature' => $signature,
-            'expires' => $expiresAt,
-            'max_file_size' => $maxFileSize,
-            'max_file_count' => $maxFileCount
-        ];
-    }
-
-    /**
      * Check if the url support variables have
      * been correctly defined.
      *

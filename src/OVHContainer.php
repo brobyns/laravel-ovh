@@ -30,7 +30,6 @@ class OVHContainer
      */
     public function getFormPostMiddlewareData($maxFileSize, $maxFileCount, $expiration, $path = '', $redirect = '')
     {
-        $this->checkParams();
 
         // expiry is relative to current time
         $expiresAt = $expiration instanceof Carbon ? $expiration->timestamp : (int) (time() + 60 * 60);
