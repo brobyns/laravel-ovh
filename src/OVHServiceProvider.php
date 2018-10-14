@@ -95,4 +95,11 @@ class OVHServiceProvider extends ServiceProvider
             isset($config['urlKey']) ? $config['urlKey'] : null,
         ];
     }
+
+    public function register()
+    {
+        $this->app->bind('ovh', function ($app) {
+            return new OVHContainer($app['config']['ovh']);
+        });
+    }
 }

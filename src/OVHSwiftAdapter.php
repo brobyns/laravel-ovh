@@ -126,14 +126,14 @@ class OVHSwiftAdapter extends SwiftAdapter
     /**
      * Generate a signature and get data for form POST middleware request
      *
-     * @param  string $path
-     * @param  string $redirect
      * @param  int $maxFileSize
      * @param  int $maxFileCount
      * @param  int $expiration
+     * @param string $path
+     * @param  string $redirect
      * @return array
      */
-    public function getFormPostMiddlewareData($path, $redirect, $maxFileSize, $maxFileCount, $expiration)
+    public function getFormPostMiddlewareData($maxFileSize, $maxFileCount, $expiration, $path = '', $redirect = '')
     {
         $this->checkParams();
 
