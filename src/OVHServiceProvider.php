@@ -99,7 +99,7 @@ class OVHServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('ovh', function ($app) {
-            return new OVHContainer($app['config']['ovh']);
+            return new OVHContainer($app['config']['filesystems']['ovh']);
         });
     }
 }
