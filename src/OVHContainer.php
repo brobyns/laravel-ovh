@@ -36,10 +36,9 @@ class OVHContainer
 
         // the url on the OVH host
         $codePath = sprintf(
-            '/v1/AUTH_%s/%s/%s',
+            '/v1/AUTH_%s/%s',
             $this->config['projectId'],
-            $this->config['container'],
-            $path
+            $this->config['container']
         );
 
         // body for the HMAC hash
